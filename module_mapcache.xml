@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mapcache" default="compile.module.mapcache">
+  <dirname property="module.mapcache.basedir" file="${ant.file.module_mapcache}"/>
+  
+  <property name="module.jdk.home.mapcache" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mapcache" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mapcache" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mapcache" value="${compiler.args}"/>
+  
+  <property name="mapcache.output.dir" value="${module.mapcache.basedir}/out/production/mapCache"/>
+  <property name="mapcache.testoutput.dir" value="${module.mapcache.basedir}/out/test/mapCache"/>
+  
+  <path id="mapcache.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mapcache.module.production.classpath">
+    <path refid="${module.jdk.classpath.mapcache}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.junit_4.classpath"/>
+    <path refid="library.annotations-api.classpath"/>
+  </path>
+  
+  <path id="mapcache.runtime.production.module.classpath">
+    <pathelement location="${mapcache.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.junit_4.classpath"/>
+    <path refid="library.annotations-api.classpath"/>
+  </path>
+  
+  <path id="mapcache.module.classpath">
+    <path refid="${module.jdk.classpath.mapcache}"/>
+    <pathelement location="${mapcache.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.junit_4.classpath"/>
+    <path refid="library.annotations-api.classpath"/>
+  </path>
+  
+  <path id="mapcache.runtime.module.classpath">
+    <pathelement location="${mapcache.testoutput.dir}"/>
+    <pathelement location="${mapcache.output.dir}"/>
+    <path refid="library.lib.classpath"/>
+    <path refid="library.junit_4.classpath"/>
+    <path refid="library.annotations-api.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mapcache">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mapcache">
+    <patternset refid="excluded.from.module.mapcache"/>
+  </patternset>
+  
+  <path id="mapcache.module.sourcepath">
+    <dirset dir="${module.mapcache.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mapcache" depends="compile.module.mapcache.production,compile.module.mapcache.tests" description="Compile module mapCache"/>
+  
+  <target name="compile.module.mapcache.production" depends="register.custom.compilers" description="Compile module mapCache; production classes">
+    <mkdir dir="${mapcache.output.dir}"/>
+    <javac2 destdir="${mapcache.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mapcache}/javac">
+      <compilerarg line="${compiler.args.mapcache}"/>
+      <bootclasspath refid="mapcache.module.bootclasspath"/>
+      <classpath refid="mapcache.module.production.classpath"/>
+      <src refid="mapcache.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mapcache"/>
+    </javac2>
+    
+    <copy todir="${mapcache.output.dir}">
+      <fileset dir="${module.mapcache.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mapcache.tests" depends="register.custom.compilers,compile.module.mapcache.production" description="compile module mapCache; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.mapcache" description="cleanup module">
+    <delete dir="${mapcache.output.dir}"/>
+    <delete dir="${mapcache.testoutput.dir}"/>
+  </target>
+</project>

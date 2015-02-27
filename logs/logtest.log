@@ -1,0 +1,5 @@
+[2013-01-21 16:12:12] INFO main net.sf.json.xml.XMLSerializer --- Using default type string
+   [2013-01-21 16:35:03] INFO main net.sf.json.xml.XMLSerializer --- Using default type string
+   [2013-01-21 16:35:20] INFO main net.sf.json.xml.XMLSerializer --- Using default type string
+   [2013-01-23 16:36:30] DEBUG main mapcatche.business.dbdao.Dbtiandtu --- 栏位索引超过许可范围：5，栏位数：4。
+   

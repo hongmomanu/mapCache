@@ -1,0 +1,26 @@
+[{
+    "text": "天地图", 
+   
+    "expanded": true,
+    "children": [{
+        "text": "线划地图1",
+        "leaf": true,
+        "checked": true
+    },{
+        "text": "卫星地图",
+        "leaf": true,
+        "checked": false
+    },{
+        "text": "地标地图",
+        "leaf": true,
+        "checked": false
+    }]
+},{
+    "text": "Google地图", 
+    
+    "children": []
+},{
+    "text": "bidu地图", 
+    
+    "children": []
+}]
